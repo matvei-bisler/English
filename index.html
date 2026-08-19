@@ -529,6 +529,101 @@ hr{border:0;border-top:1px solid var(--rule);margin:0}
   display:flex;
 }
 
+/* ============================================================
+   SAT practice modules
+   ============================================================ */
+.sat{padding-top:var(--s9);scroll-margin-top:60px}
+.sat-head{border-top:2px solid var(--red);padding-top:var(--s4);display:grid;gap:var(--s3)}
+.sat-head h2{font-size:clamp(30px,5vw,50px);letter-spacing:-.04em}
+.modbar{
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3);
+  margin-top:var(--s5);padding:11px var(--s4);
+  border:1px solid var(--rule-hard);background:var(--field);
+}
+.modbar .ms{font-size:15px;font-weight:800;letter-spacing:-.01em;white-space:nowrap}
+.modbar .ms span{color:var(--muted);font-weight:600}
+.modbar .mm{flex:1;min-width:90px;height:2px;background:var(--rule-hard)}
+.modbar .mm i{display:block;height:100%;width:0;background:var(--blue);transition:width .35s cubic-bezier(.2,.7,.3,1)}
+.modbar .btn{padding:6px 13px;font-size:12px}
+
+.satq{margin-top:var(--s6)}
+.satq .task-n{width:28px;color:var(--ink);font-weight:800;font-size:14px}
+.satq .task-q h3{font-size:16.5px;font-weight:600;letter-spacing:-.005em;line-height:1.45}
+.satq .task-body,.satq .task-foot,.satq .key{padding-left:44px}
+.satq .key{margin-left:44px;padding-left:var(--s5)}
+@media (max-width:860px){
+  .satq .task-body,.satq .task-foot{padding-left:0}
+  .satq .key{margin-left:0}
+}
+
+/* underlined sentence in function questions */
+.uline{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+
+/* paired texts for cross-text questions */
+.twin{display:grid;gap:var(--s3);max-width:var(--measure)}
+
+/* bullet notes for rhetorical synthesis */
+.notes{margin:0;padding-left:1.15em;display:grid;gap:5px;font-size:15px;line-height:1.45}
+
+/* data table for quantitative evidence questions */
+.dwrap{overflow-x:auto;max-width:100%;margin-bottom:var(--s4)}
+.dtable{border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums;min-width:min(100%,420px)}
+.dtable caption{
+  text-align:left;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);padding-bottom:var(--s2);
+}
+.dtable th,.dtable td{border:1px solid var(--rule-hard);padding:7px 11px;text-align:left}
+.dtable thead th{
+  background:var(--field-2);font-weight:600;font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;line-height:1.3;
+}
+.dtable td+td,.dtable thead th+th{text-align:right}
+.dtable tbody td:first-child{text-align:left}
+
+/* ============================================================
+   Part bands — the hard break between the exercises and the test
+   ============================================================ */
+.part{
+  background:var(--ink);color:#ffffff;
+  margin-top:var(--s9);padding:var(--s7) var(--s6);
+  display:grid;gap:var(--s3);scroll-margin-top:60px;
+}
+.part-n{
+  font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:#ff5b62;
+}
+.part h2{font-size:clamp(28px,5vw,46px);letter-spacing:-.04em;color:#ffffff;max-width:20ch}
+.part p{font-size:16px;line-height:1.55;color:rgba(255,255,255,.68);max-width:58ch}
+.part p b{color:#ffffff;font-weight:600}
+@media (max-width:640px){ .part{padding:var(--s6) var(--s5)} }
+
+/* first section after a band sits closer to it */
+.part + .ex,.part + .sat{padding-top:var(--s7)}
+
+/* ============================================================
+   Module bar — stopwatch and score
+   ============================================================ */
+.mgroup{display:flex;align-items:center;gap:var(--s3);flex-wrap:wrap}
+.mtimer{flex:0 0 auto}
+.mscore{flex:1 1 320px}
+.tdisp{
+  font-size:20px;font-weight:800;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;min-width:66px;
+}
+.mtimer[data-running="1"] .tdisp{color:var(--blue)}
+.tdisp[data-over="1"]{color:var(--red)}
+.tlimit{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
+.modbar{gap:var(--s4) var(--s6)}
+@media (max-width:660px){
+  /* each group takes a full row and wraps inside itself, so the bar
+     never forces the page sideways */
+  .mtimer,.mscore{flex:1 1 100%;min-width:0}
+  .mscore .mm{flex:1 1 100%;min-width:0;order:3}
+  .modbar{gap:var(--s3) var(--s4)}
+  .tstart,.treset{margin-left:auto}
+  .treset{margin-left:0}
+}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
 }
@@ -552,6 +647,8 @@ hr{border:0;border-top:1px solid var(--rule);margin:0}
       <a href="#ex2" data-ex="2" title="2. The Audit">2</a>
       <a href="#ex3" data-ex="3" title="3. The Assembly">3</a>
       <a href="#ex4" data-ex="4" title="4. The Bracket">4</a>
+      <a href="#m1" data-ex="m1" title="Practice Module 1">M1</a>
+      <a href="#m2" data-ex="m2" title="Practice Module 2">M2</a>
     </nav>
     <div class="score" id="score"><b>0</b> / 20 <span class="score-w">correct</span></div>
   </div>
@@ -577,6 +674,16 @@ hr{border:0;border-top:1px solid var(--rule);margin:0}
         <li>Your work is saved in this browser, so a refresh will not lose it.</li>
       </ol>
     </div>
+  </section>
+
+  <!-- ==================== PART 1 ==================== -->
+  <section class="part" id="part1">
+    <span class="part-n">Part one</span>
+    <h2>Four exercises</h2>
+    <p>
+      Not test questions. Four ways of taking the same skill apart — a ladder of claims, an audit of
+      headlines, a paragraph reassembled, and a knockout bracket of answer choices. Work these first.
+    </p>
   </section>
 
   <!-- ==================== EXERCISE 1 ==================== -->
@@ -946,6 +1053,47 @@ hr{border:0;border-top:1px solid var(--rule);margin:0}
     </div>
   </section>
 
+
+  <!-- ==================== PART 2 ==================== -->
+  <section class="part" id="part2">
+    <span class="part-n">Part two</span>
+    <h2>Practice test</h2>
+    <p>
+      From here on it is the exam itself: <b>two modules of 27 questions</b>, in the domains and the order
+      the real Reading and Writing section uses. Each module has its own stopwatch, so you can see what
+      27 questions actually costs you.
+    </p>
+  </section>
+
+  <!-- ==================== SAT MODULE 1 ==================== -->
+  <section class="sat" id="m1">
+    <div class="sat-head">
+      <span class="lbl lbl-red">Reading and Writing · Practice test</span>
+      <h2>Module 1</h2>
+      <p class="ex-blurb">
+        27 questions in the order the test uses them: Craft and Structure, Information and Ideas,
+        Standard English Conventions, Expression of Ideas. Each question stands on its own passage.
+      </p>
+    </div>
+    <div class="modbar" data-modbar="m1"></div>
+    <div data-satmod="m1"></div>
+  </section>
+
+  <!-- ==================== SAT MODULE 2 ==================== -->
+  <section class="sat" id="m2">
+    <div class="sat-head">
+      <span class="lbl lbl-red">Reading and Writing · Practice test</span>
+      <h2>Module 2</h2>
+      <p class="ex-blurb">
+        27 questions in the same four domains, harder throughout — denser passages, closer distractors,
+        and conventions questions that turn on a single mark. On test day this is the module you are
+        routed to after a strong first module.
+      </p>
+    </div>
+    <div class="modbar" data-modbar="m2"></div>
+    <div data-satmod="m2"></div>
+  </section>
+
   <footer class="foot">
     <button class="btn btn-ghost" id="resetall" type="button">Clear all my work</button>
   </footer>
@@ -968,6 +1116,7 @@ function persist(){
 }
 
 var REG = [];
+var BY_ID = {};
 function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 function el(tag, cls, html){
   var n = document.createElement(tag);
@@ -994,6 +1143,7 @@ function Widget(spec){
   if(prev && prev.s){
     try{ this.state = this.hydrate(prev.s); this.checked = !!prev.c; this.revealed = !!prev.r; }catch(e){}
   }
+  BY_ID[this.id] = this;
   REG.push(this);
 }
 Widget.prototype.hydrate = function(s){ return s; };
@@ -1044,7 +1194,8 @@ Widget.prototype.buildFoot = function(){
 };
 Widget.prototype.buildKey = function(){
   var s = this.spec;
-  var h = '<span class="lbl">Answer · ' + esc(s.id.replace("t","").replace(/^(\d)(\d)$/,"$1.$2")) + '</span>';
+  var lab = s.keyLabel || ("Answer · " + s.id.replace("t","").replace(/^(\d)(\d)$/,"$1.$2"));
+  var h = '<span class="lbl">' + esc(lab) + '</span>';
   if(s.keyLine) h += "<p><b>" + s.keyLine + "</b></p>";
   if(s.keyWhy) h += "<p>" + s.keyWhy + "</p>";
   if(s.keySay) h += '<p class="say">' + s.keySay + "</p>";
@@ -1288,6 +1439,49 @@ Grid.prototype.render = function(){
   this.afterRender();
 };
 
+/* Source material for a question: passage, paired texts, notes, table */
+function renderSource(host, s){
+  if(s.texts){
+    var twin = el("div","twin");
+    twin.style.marginBottom = "16px";
+    s.texts.forEach(function(t){
+      var d = el("div","doc");
+      d.appendChild(el("span","lbl doc-lbl", esc(t[0])));
+      d.appendChild(el("p","", t[1]));
+      twin.appendChild(d);
+    });
+    host.appendChild(twin);
+  }
+  if(s.stem || s.notes || s.table){
+    var box = el("div","doc");
+    box.style.marginBottom = "16px";
+    box.appendChild(el("span","lbl doc-lbl", s.stemLabel || "The text"));
+    if(s.stem) box.appendChild(el("p","", s.stem));
+    if(s.notes){
+      var ul = el("ul","notes");
+      s.notes.forEach(function(n){ ul.appendChild(el("li","", n)); });
+      box.appendChild(ul);
+    }
+    if(s.table){
+      var wrap = el("div","dwrap");
+      var tb = el("table","dtable");
+      tb.appendChild(el("caption","", esc(s.table.cap)));
+      var thead = el("thead",""), hr = el("tr","");
+      s.table.h.forEach(function(h){ hr.appendChild(el("th","", esc(h))); });
+      thead.appendChild(hr); tb.appendChild(thead);
+      var tbody = el("tbody","");
+      s.table.r.forEach(function(row){
+        var tr = el("tr","");
+        row.forEach(function(c){ tr.appendChild(el("td","", esc(c))); });
+        tbody.appendChild(tr);
+      });
+      tb.appendChild(tbody); wrap.appendChild(tb); box.appendChild(wrap);
+    }
+    if(s.stem2) box.appendChild(el("p","", s.stem2));
+    host.appendChild(box);
+  }
+}
+
 /* =============================================================
    CHOICE — multiple choice, one answer
    ============================================================= */
@@ -1303,13 +1497,7 @@ Choice.prototype.render = function(){
   if(this.revealed) st.sel = s.answer;
   this.host.innerHTML = "";
 
-  if(s.stem){
-    var stem = el("div","doc");
-    stem.style.marginBottom = "16px";
-    stem.appendChild(el("span","lbl doc-lbl", s.stemLabel || "The text"));
-    stem.appendChild(el("p","", s.stem));
-    this.host.appendChild(stem);
-  }
+  renderSource(this.host, s);
 
   var box = el("div","opts");
   s.options.forEach(function(o){
@@ -2071,6 +2259,868 @@ new SentencePick({
   keyWhy:"Function questions ask about one part of the text, and a choice that correctly describes a different part is the most common wrong answer in the type."
 });
 
+/* ============================================================
+   SAT PRACTICE — MODULE 1
+   Craft and Structure 1-7 · Information and Ideas 8-14
+   Standard English Conventions 15-22 · Expression of Ideas 23-27
+   ============================================================ */
+var SAT_M1 = [
+
+/* ---------- Craft and Structure ---------- */
+{ d:"Words in Context",
+  p:"Which choice completes the text with the most logical and precise word or phrase?",
+  stem:"The archaeologist Kathleen Kenyon was known for the slowness of her excavations. Rather than digging quickly toward the oldest layers, she removed soil in thin slices and recorded each one before going further. Colleagues who wanted results sooner found the method tedious, but it produced far more ______ records of the sites she worked on than faster digging ever had.",
+  o:{A:"ancient",
+     B:"detailed",
+     C:"popular",
+     D:"brief"}, a:"B",
+  w:{A:"The records are not old; the site is.",
+     B:"Correct. The slices are <b>recorded</b> one by one, so the records are fuller — more detailed.",
+     C:"Colleagues found the method tedious, which points away from popularity.",
+     D:"Brief records are the opposite of what a slow, layer-by-layer method yields."} },
+
+{ d:"Words in Context",
+  p:"Which choice completes the text with the most logical and precise word or phrase?",
+  stem:"Composer Florence Price sent her scores to orchestras under a name that concealed both her race and her gender. Her letters make clear that she had no doubt about the quality of the work she was submitting; the concealment was a response to the ______ of the concert world of the 1930s.",
+  o:{A:"prejudice",
+     B:"generosity",
+     C:"confusion",
+     D:"enthusiasm"}, a:"A",
+  w:{A:"Correct. She hid race and gender specifically, and not from self-doubt — so the barrier was in the institution.",
+     B:"A generous concert world would give her no reason to hide anything.",
+     C:"Nothing suggests the concert world was confused.",
+     D:"Enthusiasm would not require a false name."} },
+
+{ d:"Words in Context",
+  p:"As used in the text, what does the word “draws” most nearly mean?",
+  stem:"The desert tortoise can survive for a year without drinking. It stores water in its bladder during the brief season of rain and <span class=\"uline\">draws</span> on that reserve through the driest months, staying active above ground when other animals must retreat below it.",
+  o:{A:"sketches",
+     B:"attracts",
+     C:"takes",
+     D:"stretches"}, a:"C",
+  w:{A:"A common meaning of the word, but nothing here is being sketched.",
+     B:"The tortoise is not attracting the reserve; it already has it.",
+     C:"Correct. It takes water from a store it built up earlier.",
+     D:"Nothing is being stretched or extended."} },
+
+{ d:"Text Structure and Purpose",
+  p:"Which choice best states the main purpose of the text?",
+  stem:"Katsushika Hokusai produced <i>Thirty-Six Views of Mount Fuji</i> in his seventies. The series is not a straightforward record of a landmark. In one print Fuji fills the frame; in another it is a small white triangle behind fishermen; in the best known of them it sits far off beyond a breaking wave that dwarfs it. The mountain never changes. Everything the viewer is asked to see it through does.",
+  o:{A:"To argue that Hokusai’s late work surpasses his early work.",
+     B:"To describe how one subject is presented differently across a series of prints.",
+     C:"To explain the technical process of Japanese woodblock printing.",
+     D:"To compare Hokusai’s prints with European landscape painting."}, a:"B",
+  w:{A:"No comparison with his early work appears.",
+     B:"Correct. The text works through several prints to show the same mountain treated differently in each.",
+     C:"The printing process is never described.",
+     D:"European painting is never mentioned."} },
+
+{ d:"Text Structure and Purpose",
+  p:"Which choice best describes the function of the underlined sentence in the text as a whole?",
+  stem:"Honeybees report the location of food through a movement called the waggle dance. A returning forager walks a short straight line while vibrating her body, then loops back and repeats it. <span class=\"uline\">The angle of that straight run, measured against vertical, matches the angle of the food source relative to the sun.</span> Bees that follow the dancer closely will often leave the hive and fly directly to the flowers she found.",
+  o:{A:"It explains how one part of the dance carries specific information.",
+     B:"It questions whether the dance described earlier is accurate.",
+     C:"It offers evidence that bees can see ultraviolet light.",
+     D:"It introduces a second method bees use to find food."}, a:"A",
+  w:{A:"Correct. It takes one element already mentioned — the straight run — and says what it encodes.",
+     B:"The sentence supports the account rather than doubting it.",
+     C:"Ultraviolet vision is never raised.",
+     D:"It elaborates the same method rather than adding another."} },
+
+{ d:"Text Structure and Purpose",
+  p:"Which choice best describes the overall structure of the text?",
+  stem:"The axolotl was long treated as a curiosity: a salamander that never leaves its larval form, keeping its feathery gills for life. Then researchers looked harder at something it does that no curiosity should. An axolotl can regrow an amputated limb — bone, muscle, nerve and skin — and it finishes without a scar. Laboratories that once kept a few as oddities now maintain colonies of thousands.",
+  o:{A:"It criticises researchers for having neglected an important species.",
+     B:"It lists several species capable of regeneration and ranks them.",
+     C:"It describes a single experiment and reports its results.",
+     D:"It presents a longstanding view of an animal and then describes what displaced that view."}, a:"D",
+  w:{A:"The text reports a shift in attention without blaming anyone.",
+     B:"Only one species is discussed.",
+     C:"No experiment is described.",
+     D:"Correct. Old view (a curiosity), then the finding that changed it, then the consequence."} },
+
+{ d:"Cross-Text Connections",
+  p:"Based on the texts, how would the author of Text 2 most likely respond to the claim made in Text 1?",
+  texts:[["Text 1","Public libraries should be judged by how much they lend. Circulation figures are cheap to collect, comparable from year to year, and they show directly whether a collection is being used."],
+         ["Text 2","A library that counts only loans will misjudge itself. People come in to use a computer, to attend a class, to meet a tutor, or simply to sit somewhere warm and quiet. None of that shows up in circulation figures, and in many communities it is the larger part of what the building actually provides."]],
+  o:{A:"By arguing that circulation figures cannot be collected accurately.",
+     B:"By agreeing that circulation figures are easy to collect but arguing that they omit much of how a library is used.",
+     C:"By claiming that libraries should stop lending items altogether.",
+     D:"By noting that most visitors do borrow at least one item."}, a:"B",
+  w:{A:"Text 2 objects to what the figures leave out, not to their accuracy.",
+     B:"Correct. Text 2 never disputes that loans are easy to count — it disputes that counting them captures the use.",
+     C:"Text 2 says nothing against lending.",
+     D:"This would support Text 1, and Text 2 argues the opposite."} },
+
+
+/* ---------- Information and Ideas ---------- */
+{ d:"Central Ideas and Details",
+  p:"Which choice best states the main idea of the text?",
+  stem:"The Silk Road was never a road. It was a shifting web of routes across Central Asia, and most of the people moving along it covered only one short segment before handing their goods to the next merchant. Silk that reached Rome had passed through many hands, and few of those hands knew where it had started or where it would end.",
+  o:{A:"Goods crossed Central Asia through a chain of intermediaries rather than along a single route travelled end to end.",
+     B:"Roman traders regularly travelled to China to buy silk directly.",
+     C:"Silk was the only commodity of value carried across Central Asia.",
+     D:"Central Asian merchants kept careful records of where their goods originated."}, a:"A",
+  w:{A:"Correct. Both halves of the text make this point: a web, not a road, and many hands.",
+     B:"The text says the opposite — traders covered short segments.",
+     C:"Other goods are not excluded; silk is simply the example.",
+     D:"The last sentence says few knew the origin."} },
+
+{ d:"Central Ideas and Details",
+  p:"Which choice best states the main idea of the text?",
+  stem:"For most of the twentieth century the ocean floor was assumed to be a featureless plain. Sonar surveys after 1950 found something else: a mountain range more than sixty thousand kilometres long, running through every ocean basin, with a deep valley along its crest. The discovery did not simply add a feature to the map. It supplied the mechanism that the theory of continental drift had been missing.",
+  o:{A:"The discovery of a global undersea mountain range corrected the map and supported an existing theory.",
+     B:"Sonar was developed specifically in order to map the ocean floor.",
+     C:"The ocean floor is considerably deeper than scientists had expected.",
+     D:"Continental drift was already widely accepted before 1950."}, a:"A",
+  w:{A:"Correct. The last two sentences insist the discovery did both things.",
+     B:"Why sonar was developed is never stated.",
+     C:"Depth is not the point; the ridge and its valley are.",
+     D:"The theory was “missing” a mechanism, which is why the find mattered."} },
+
+{ d:"Command of Evidence (Textual)",
+  p:"Which quotation from “The Salt Road” would best support the student’s claim?",
+  stem:"In the novel <i>The Salt Road</i>, the narrator describes her grandmother’s silences at length but rarely reports her speech. A student argues that these silences are presented as a form of communication rather than as an absence of it.",
+  o:{A:"“My grandmother sat by the window and said nothing for the whole of that afternoon.”",
+     B:"“She spoke rarely, and when she did her voice was very quiet.”",
+     C:"“When I asked about the crossing, she looked at the door until I understood that the subject was closed.”",
+     D:"“The house was silent except for the clock in the hallway.”"}, a:"C",
+  w:{A:"Records silence but nothing passes between them — an absence, which is what the student denies.",
+     B:"About the quality of her voice when she does speak.",
+     C:"Correct. The silence is read, understood, and settles the question. That is communication.",
+     D:"Describes ambient quiet in a room, not the grandmother."} },
+
+{ d:"Command of Evidence (Textual)",
+  p:"Which finding, if true, would most directly support the researcher’s hypothesis?",
+  stem:"Urban crows solve novel puzzles faster than rural crows. One researcher hypothesises that this is because urban birds meet unfamiliar objects constantly, not because they are inherently better problem-solvers.",
+  o:{A:"Rural crows raised among many unfamiliar objects solve the puzzles as quickly as urban crows do.",
+     B:"Urban crows have larger brains relative to body size than rural crows.",
+     C:"Urban crows are more willing than rural crows to approach humans.",
+     D:"Both urban and rural crows solve the puzzles faster on a second attempt."}, a:"A",
+  w:{A:"Correct. Give rural birds the exposure and the gap closes — exactly what the hypothesis predicts.",
+     B:"Points to an inherent difference, which is the explanation the researcher rejects.",
+     C:"Boldness toward people is a separate trait.",
+     D:"True of both groups, so it distinguishes nothing."} },
+
+{ d:"Command of Evidence (Quantitative)",
+  p:"Which choice most effectively uses data from the table to complete the statement?",
+  stem:"Ecologists in a reforested valley recorded, for four bird species, how far seeds were carried from the parent tree and what share of those seeds later germinated.",
+  table:{ cap:"Seed dispersal by four bird species",
+          h:["Species","Mean dispersal distance (m)","Seeds germinating (%)"],
+          r:[["Grey thrush","42","31"],["Band-tailed pigeon","118","24"],["Green barbet","27","46"],["Hill myna","76","19"]] },
+  stem2:"The team noted that dispersal distance and germination rate do not rise together: for example, ______",
+  o:{A:"the band-tailed pigeon had both the greatest dispersal distance and the highest germination rate.",
+     B:"the hill myna carried seeds farther than the band-tailed pigeon and had the higher germination rate.",
+     C:"the green barbet had both the highest germination rate and the greatest dispersal distance.",
+     D:"the grey thrush carried seeds farther than the green barbet but had the lower germination rate."}, a:"D",
+  w:{A:"The pigeon’s 24% is not the highest germination rate; the barbet’s 46% is.",
+     B:"The myna carried seeds 76 m, less than the pigeon’s 118 m.",
+     C:"The barbet’s 27 m is the shortest distance in the table.",
+     D:"Correct. 42 m beats 27 m, yet 31% trails 46% — the two measures pull apart."} },
+
+{ d:"Inferences",
+  p:"Which choice most logically completes the text?",
+  stem:"Emperor penguins huddle in tight groups through the Antarctic winter. Birds on the outside of a huddle lose heat quickly; birds at the centre can become too warm. Tracking individuals, researchers found the huddle is never still: penguins at the windward edge shuffle along the outside and rejoin at the sheltered side, and the whole mass creeps slowly across the ice. Over the course of a single night, then, ______",
+  o:{A:"huddling brings no measurable benefit to the colony.",
+     B:"the birds at the centre of the huddle do not move at all.",
+     C:"most birds spend time both at the edge and near the centre of the huddle.",
+     D:"the huddle stays in exactly the same place on the ice."}, a:"C",
+  w:{A:"The text explains how huddling manages heat; no benefit is denied.",
+     B:"The text says the huddle is never still.",
+     C:"Correct. Continuous circulation from edge to sheltered side means positions keep changing hands.",
+     D:"The mass “creeps slowly across the ice.”"} },
+
+{ d:"Inferences",
+  p:"Which choice most logically completes the text?",
+  stem:"A shipping company refitted part of its fleet with propellers designed to reduce the collapse of vapour bubbles behind the blades. That collapse is the main source of underwater noise from a moving ship. Recordings along a busy route confirmed that the refitted vessels were markedly quieter than the rest of the fleet. Because whales in the region locate one another by sound over long distances, the refit is likely to ______",
+  o:{A:"prevent whales from entering the shipping route at all.",
+     B:"increase the fuel consumption of the refitted vessels.",
+     C:"make the vessels harder for their own crews to steer.",
+     D:"reduce the interference these vessels cause to whale communication."}, a:"D",
+  w:{A:"Far too strong — the text is about noise, not exclusion.",
+     B:"Fuel use is never mentioned.",
+     C:"Handling is never mentioned.",
+     D:"Correct. Quieter ships plus sound-dependent whales gives less masking of their calls."} },
+
+
+/* ---------- Standard English Conventions ---------- */
+{ d:"Boundaries",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"The Great Barrier Reef is not one continuous ______ it is made up of nearly three thousand separate reefs and hundreds of islands.",
+  o:{A:"structure;",
+     B:"structure,",
+     C:"structure and",
+     D:"structure being"}, a:"A",
+  w:{A:"Correct. Both halves stand alone as sentences, so a semicolon joins them.",
+     B:"A comma between two independent clauses is a comma splice.",
+     C:"Joining two independent clauses with <i>and</i> requires a comma before it.",
+     D:"<i>Being</i> leaves the sentence without a second main verb."} },
+
+{ d:"Boundaries",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"Chien-Shiung Wu, whose experiments overturned a principle physicists had assumed for ______ not included in the Nobel Prize awarded for that discovery.",
+  o:{A:"decades was",
+     B:"decades, was",
+     C:"decades; was",
+     D:"decades, and was"}, a:"B",
+  w:{A:"The nonrestrictive clause opened by <i>whose</i> must be closed by a comma.",
+     B:"Correct. A pair of commas encloses <i>whose … decades</i>, leaving <i>Chien-Shiung Wu … was not included</i>.",
+     C:"A semicolon needs a full clause on each side; <i>was not included…</i> is not one.",
+     D:"<i>And</i> makes the main clause a fragment with no subject of its own."} },
+
+{ d:"Boundaries",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"The kit contained everything the surveyors ______ a brass compass, a steel tape, and a folding rod marked in feet.",
+  o:{A:"needed,",
+     B:"needed;",
+     C:"needed:",
+     D:"needed, and"}, a:"C",
+  w:{A:"A bare comma cannot introduce a list after a complete clause.",
+     B:"A semicolon must be followed by an independent clause, not a list.",
+     C:"Correct. A complete sentence precedes the colon, and a list follows it.",
+     D:"<i>And</i> turns the first list item into a false continuation of the clause."} },
+
+{ d:"Boundaries",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"Researchers who study volcanic ash ______ collect their samples within hours of an eruption, before rain begins to alter the particles.",
+  o:{A:", often",
+     B:"often,",
+     C:"often",
+     D:", often,"}, a:"C",
+  w:{A:"Cuts the subject off from the rest of its own clause.",
+     B:"Puts a comma between the adverb and the verb it modifies.",
+     C:"Correct. Nothing should separate the subject from its verb.",
+     D:"Encloses <i>often</i> as though it were a supplement, which it is not."} },
+
+{ d:"Form, Structure, and Sense",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"A collection of letters written by soldiers during the campaign ______ now held in the national archive.",
+  o:{A:"are",
+     B:"have been",
+     C:"were",
+     D:"is"}, a:"D",
+  w:{A:"Agrees with <i>letters</i>, which sits inside a prepositional phrase, not with the subject.",
+     B:"Plural.",
+     C:"Plural, and past where the present is needed.",
+     D:"Correct. The subject is <i>A collection</i> — singular — and <i>now</i> calls for the present."} },
+
+{ d:"Form, Structure, and Sense",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"By the time the surveying team reached the summit in 1953, several earlier expeditions ______ the same route and turned back short of the top.",
+  o:{A:"attempt",
+     B:"had attempted",
+     C:"are attempting",
+     D:"will attempt"}, a:"B",
+  w:{A:"Present tense cannot describe events finished before 1953.",
+     B:"Correct. The past perfect places the earlier attempts before the past event.",
+     C:"Present progressive has the same problem.",
+     D:"Future tense reverses the order entirely."} },
+
+{ d:"Form, Structure, and Sense",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"The committee released ______ findings three months after the final hearing ended.",
+  o:{A:"their",
+     B:"it’s",
+     C:"its",
+     D:"they’re"}, a:"C",
+  w:{A:"Plural, but the antecedent is singular.",
+     B:"<i>It’s</i> is the contraction of <i>it is</i>.",
+     C:"Correct. <i>Committee</i> is singular here, and the possessive form is <i>its</i>.",
+     D:"<i>They’re</i> is the contraction of <i>they are</i>."} },
+
+{ d:"Form, Structure, and Sense",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"Comparing photographs taken a century apart, ______",
+  o:{A:"the glacier has retreated nearly two kilometres since the first survey.",
+     B:"it is clear that the glacier has retreated nearly two kilometres.",
+     C:"researchers found that the glacier had retreated nearly two kilometres.",
+     D:"nearly two kilometres of the glacier has disappeared since the first survey."}, a:"C",
+  w:{A:"The glacier is not doing the comparing — a dangling modifier.",
+     B:"<i>It</i> cannot compare photographs either.",
+     C:"Correct. The researchers do the comparing, so they must follow the modifier.",
+     D:"Two kilometres of ice cannot compare photographs."} },
+
+
+/* ---------- Expression of Ideas ---------- */
+{ d:"Transitions",
+  p:"Which choice completes the text with the most logical transition?",
+  stem:"Almost every flowering plant on the island grows nowhere else on Earth. ______ close to a third of its resident bird species are unique to it.",
+  o:{A:"However,",
+     B:"For example,",
+     C:"Nevertheless,",
+     D:"Similarly,"}, a:"D",
+  w:{A:"Signals contrast, but the two facts agree.",
+     B:"Birds are not an example of flowering plants.",
+     C:"Signals concession, and none is being made.",
+     D:"Correct. A second group shows the same pattern of endemism."} },
+
+{ d:"Transitions",
+  p:"Which choice completes the text with the most logical transition?",
+  stem:"The new alloy is markedly stronger than steel of the same weight. ______ it corrodes so quickly in salt water that shipbuilders have found little use for it.",
+  o:{A:"Therefore,",
+     B:"However,",
+     C:"Likewise,",
+     D:"In addition,"}, a:"B",
+  w:{A:"Strength does not cause corrosion.",
+     B:"Correct. An advantage is followed by the drawback that cancels it.",
+     C:"The second fact undercuts the first rather than matching it.",
+     D:"Signals another point in the same direction."} },
+
+{ d:"Transitions",
+  p:"Which choice completes the text with the most logical transition?",
+  stem:"The gold-plated disc aboard Voyager 1 was never expected to be found soon. ______ it was engineered to remain readable for a billion years in the near-vacuum between the stars.",
+  o:{A:"In contrast,",
+     B:"Indeed,",
+     C:"Nonetheless,",
+     D:"Meanwhile,"}, a:"B",
+  w:{A:"The second sentence agrees with the first rather than opposing it.",
+     B:"Correct. It confirms and intensifies: not soon — in fact, on a scale of a billion years.",
+     C:"Signals a concession the text does not make.",
+     D:"Signals simultaneous events."} },
+
+{ d:"Rhetorical Synthesis",
+  p:"The student wants to emphasise the scale of the lynx’s recovery. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+  stem:"While researching a topic, a student has taken the following notes:",
+  notes:["The Iberian lynx once ranged across Spain and Portugal.",
+         "By 2002, fewer than 100 remained in the wild.",
+         "A captive breeding programme began in 2003.",
+         "Rabbit populations, the lynx’s main prey, were restored alongside it.",
+         "By 2023 the wild population had passed 2,000."],
+  o:{A:"The Iberian lynx, once found across Spain and Portugal, feeds mainly on rabbits.",
+     B:"A captive breeding programme for the Iberian lynx began in 2003.",
+     C:"Restoring rabbit populations mattered because rabbits are the lynx’s main prey.",
+     D:"The wild Iberian lynx population grew from fewer than 100 in 2002 to more than 2,000 by 2023."}, a:"D",
+  w:{A:"Range and diet say nothing about recovery.",
+     B:"Gives the cause but never the size of the result.",
+     C:"Explains one measure taken, not the outcome.",
+     D:"Correct. The two population figures set side by side are the scale."} },
+
+{ d:"Rhetorical Synthesis",
+  p:"The student wants to explain how a tsunami is detected at sea. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+  stem:"While researching a topic, a student has taken the following notes:",
+  notes:["Tsunami warning systems use pressure sensors on the sea floor.",
+         "A passing tsunami changes the pressure on the sensor by a small amount.",
+         "The sensor sends the reading to a surface buoy, which relays it to a satellite.",
+         "Warning centres compare readings from several buoys.",
+         "Coastal alerts can be issued within minutes."],
+  o:{A:"Sea-floor sensors register the slight pressure change caused by a passing tsunami and relay the reading through a surface buoy to a satellite.",
+     B:"Warning centres compare readings from several buoys, and coastal alerts follow within minutes.",
+     C:"Tsunami warning buoys float on the surface of the open ocean.",
+     D:"Coastal alerts can be issued within minutes of a tsunami being detected."}, a:"A",
+  w:{A:"Correct. Sensor, pressure change, relay — the detection itself, in order.",
+     B:"Describes what happens after detection.",
+     C:"Locates the buoy without explaining detection.",
+     D:"Starts from “being detected” and so skips the mechanism."} }
+
+];
+
+/* ============================================================
+   SAT PRACTICE — MODULE 2 (harder)
+   ============================================================ */
+var SAT_M2 = [
+
+/* ---------- Craft and Structure ---------- */
+{ d:"Words in Context",
+  p:"Which choice completes the text with the most logical and precise word or phrase?",
+  stem:"Certain modernist poets built their verse out of found language, lifting phrases from business reports, travel guides and scientific manuals and setting them into lines without smoothing away the flatness of their sources. Critics who prized a single, uniform poetic voice found the results unpleasantly ______.",
+  o:{A:"melodious",
+     B:"heterogeneous",
+     C:"conventional",
+     D:"concise"}, a:"B",
+  w:{A:"Praise, and these critics are objecting.",
+     B:"Correct. Phrases drawn from unlike sources and left unsmoothed make a mixed texture — the opposite of the uniform voice these critics wanted.",
+     C:"Borrowing from manuals and reports is the unconventional move.",
+     D:"Nothing here concerns length."} },
+
+{ d:"Words in Context",
+  p:"Which choice completes the text with the most logical and precise word or phrase?",
+  stem:"The ruling did not settle the question so much as ______ it. By declining to define the term at issue, the judges left the identical dispute available to the next litigant willing to bring it.",
+  o:{A:"resolve",
+     B:"publicise",
+     C:"simplify",
+     D:"defer"}, a:"D",
+  w:{A:"Contradicts <i>did not settle</i>.",
+     B:"Publicity is not at issue.",
+     C:"Leaving a term undefined does not make the dispute simpler.",
+     D:"Correct. The dispute is not ended but held over for someone else — put off."} },
+
+{ d:"Words in Context",
+  p:"As used in the text, what does the word “migrates” most nearly mean?",
+  stem:"Ecologists once drew the boundary between forest and grassland as a line to be surveyed and fixed. Current work treats it instead as a zone that <span class=\"uline\">migrates</span> across decades — advancing into the grass in a run of wet years, giving ground again in a run of dry ones.",
+  o:{A:"travels seasonally",
+     B:"expands permanently",
+     C:"disappears",
+     D:"shifts position"}, a:"D",
+  w:{A:"The cycle described runs over decades, not seasons.",
+     B:"It also gives ground, so the movement is not one-way.",
+     C:"It moves rather than vanishing.",
+     D:"Correct. The zone moves one way, then back — it changes position."} },
+
+{ d:"Text Structure and Purpose",
+  p:"Which choice best describes the function of the underlined sentence in the text as a whole?",
+  stem:"Historians long explained Britain’s early mechanisation by pointing to its coal reserves and its colonial markets. <span class=\"uline\">Both advantages were shared by several other European states that did not mechanise first.</span> What set Britain apart, more recent accounts argue, was the unusually high price of labour relative to fuel, which made a machine worth building even when it ran badly.",
+  o:{A:"It supplies further evidence for the traditional explanation.",
+     B:"It concedes that the newer explanation is incomplete.",
+     C:"It identifies a weakness in the traditional explanation and so prepares for an alternative.",
+     D:"It defines a term used in the traditional explanation."}, a:"C",
+  w:{A:"It undercuts that explanation rather than supporting it.",
+     B:"The concession, if any, runs against the older view.",
+     C:"Correct. If rivals had the same advantages, those advantages cannot explain Britain alone — which is what opens the door to the account that follows.",
+     D:"No term is defined."} },
+
+{ d:"Text Structure and Purpose",
+  p:"Which choice best describes the overall structure of the text?",
+  stem:"It is often said that the printing press caused the Reformation. The claim is hard to test. Presses spread across Europe for decades before 1517 without producing anything comparable, and regions thick with printers were not uniformly readier for reform. What the press does seem to have done is change the speed at which a local quarrel could become a continental one. <i>Cause</i> is the wrong word. <i>Accelerant</i> may be the right one.",
+  o:{A:"It argues that the printing press had no bearing on the Reformation.",
+     B:"It sets out two competing theories and endorses the older of them.",
+     C:"It describes a technology and catalogues its principal uses.",
+     D:"It states a familiar claim, tests and weakens it, then proposes a more exact formulation."}, a:"D",
+  w:{A:"The text keeps a real role for the press — it changes the speed.",
+     B:"The older claim is the one being weakened.",
+     C:"No catalogue of uses appears.",
+     D:"Correct. Claim, then two pieces of counter-evidence, then a replacement word offered in its place."} },
+
+{ d:"Text Structure and Purpose",
+  p:"Which choice best states the main purpose of the text?",
+  stem:"A conservator cleaning a seventeenth-century canvas has to decide how much of its history to take off. Varnish yellows. Earlier restorers added paint of their own. Grime records the rooms the picture has hung in. Remove everything and the work may look as it did leaving the studio, but three centuries of evidence go into the solvent. Remove nothing and the painting stays unreadable. The decision is not a technical one, and no quantity of analysis will make it one.",
+  o:{A:"To present conservation as a matter of judgement that technical analysis cannot settle.",
+     B:"To explain the chemical process by which varnish yellows.",
+     C:"To argue that old paintings should never be cleaned.",
+     D:"To compare seventeenth-century canvases with modern ones."}, a:"A",
+  w:{A:"Correct. The closing sentence states it directly, and the two failing extremes set it up.",
+     B:"Yellowing is one item in a list, not the subject.",
+     C:"Removing nothing is rejected too.",
+     D:"Modern canvases never appear."} },
+
+{ d:"Cross-Text Connections",
+  p:"Based on the texts, how would the author of Text 2 most likely characterise the evidence described in Text 1?",
+  texts:[["Text 1","Studies of bilingual children consistently report an advantage on tasks that require suppressing irrelevant information. Managing two languages appears to exercise the very control processes these tasks measure."],
+         ["Text 2","The bilingual advantage has been reported many times. Studies that find no effect, however, are far less likely to reach print. When unpublished results are counted, the effect shrinks toward zero. This does not establish that the advantage is absent. It establishes that the published record cannot tell us whether it is there."]],
+  o:{A:"As inconclusive, since the published studies are not a representative sample of the studies conducted.",
+     B:"As unreliable, since the studies relied on inappropriate tasks.",
+     C:"As decisive, since the finding has been replicated many times over.",
+     D:"As irrelevant, since bilingualism has no effect on cognition."}, a:"A",
+  w:{A:"Correct. Its complaint is selection: null results stay unpublished, so the visible record is skewed.",
+     B:"Text 2 never criticises the tasks.",
+     C:"Text 2 argues that repeated publication is exactly what cannot be trusted here.",
+     D:"Text 2 explicitly refuses this conclusion."} },
+
+
+/* ---------- Information and Ideas ---------- */
+{ d:"Central Ideas and Details",
+  p:"Which choice best states the main idea of the text?",
+  stem:"The word <i>nomadic</i> suggests wandering, but movement across the Eurasian steppe was rarely aimless. Routes were inherited, pastures were entered in a fixed order, and the timing of each move was set by the growth of particular grasses. A household that left early found the grass too short; one that left late found it already grazed. What looked to settled observers like the freedom of the open plain was in practice a timetable with very little slack in it.",
+  o:{A:"Steppe pastoralists covered greater distances than settled peoples realised.",
+     B:"Settled and nomadic societies of the steppe rarely came into contact.",
+     C:"The grasses of the Eurasian steppe grow more slowly than those of other regions.",
+     D:"Steppe pastoralism followed a tightly constrained schedule that outsiders mistook for aimless movement."}, a:"D",
+  w:{A:"Distance is never discussed.",
+     B:"Settled observers are mentioned as observers, not as strangers.",
+     C:"Growth sets the timing, but no comparison with other regions is made.",
+     D:"Correct. The last sentence names both halves: it looked like freedom, it was a timetable."} },
+
+{ d:"Central Ideas and Details",
+  p:"Which choice best states the main idea of the text?",
+  stem:"In 1856 a chemist trying to synthesise quinine produced instead a black sludge that stained silk a brilliant purple. The dye made its discoverer wealthy and founded an industry. It also changed what chemists worked on. Within twenty years the hunt for new colours had become the main engine of organic chemistry, and the field’s centre of gravity had shifted from analysing substances found in nature to manufacturing ones that had never existed.",
+  o:{A:"Silk was the only fabric the new dye would colour successfully.",
+     B:"Quinine could not be synthesised by nineteenth-century methods.",
+     C:"An accidental discovery redirected the priorities of an entire scientific field.",
+     D:"Nineteenth-century organic chemists were mainly interested in medicine."}, a:"C",
+  w:{A:"Silk is the example given, not a limit stated.",
+     B:"The failed synthesis is the setup, not the point.",
+     C:"Correct. The accident is the first sentence; the redirection of the field is the last three.",
+     D:"Medicine is where the story starts and precisely what the field moves away from."} },
+
+{ d:"Command of Evidence (Textual)",
+  p:"Which quotation from “The Weighing House” would best support the critic’s argument?",
+  stem:"In the short story <i>The Weighing House</i>, the narrator describes objects by their mass far more often than by their appearance. A critic argues that this habit reflects his training as a customs inspector rather than any indifference to how things look.",
+  o:{A:"“He had never cared for the harbour, and said so whenever anyone asked him.”",
+     B:"“She asked what he thought of the painting, and he said nothing at all.”",
+     C:"“The room was cold, and the window would not close properly.”",
+     D:"“The vase came to four pounds and some ounces, and he knew before he set it down that the glaze had been laid on too thick.”"}, a:"D",
+  w:{A:"A dislike of the harbour speaks to neither half of the claim.",
+     B:"His silence about a painting suggests indifference, which is what the critic denies.",
+     C:"Describes the room, with no weighing and no aesthetic judgement.",
+     D:"Correct. He weighs the vase <i>and</i> judges its glaze — trained habit, not blindness to appearance."} },
+
+{ d:"Command of Evidence (Textual)",
+  p:"Which finding, if true, would most directly support the researchers’ proposal?",
+  stem:"Some researchers propose that the bright plumage of male birds in dense forest evolved to be seen in the narrow shafts of light that reach the forest floor, rather than to be seen across open distance. If they are right, brightness should track the light environment a species occupies rather than the size of its range.",
+  o:{A:"Species in forests with broken, patchy canopy have brighter plumage than close relatives in uniformly dark forest.",
+     B:"Species with larger geographic ranges tend to have brighter plumage than species with smaller ranges.",
+     C:"Female birds in dense forest are generally duller than males of the same species.",
+     D:"Bright plumage makes males more conspicuous to predators."}, a:"A",
+  w:{A:"Correct. Related species differing in light environment differ in brightness — brightness tracks light, as predicted.",
+     B:"Supports the range explanation the proposal rejects.",
+     C:"A sex difference that holds under either explanation.",
+     D:"A cost of brightness, not evidence about its cause."} },
+
+{ d:"Command of Evidence (Quantitative)",
+  p:"Which choice most effectively uses data from the table to complete the statement?",
+  stem:"A team compared four insulating materials, measuring the heat passing through a five-centimetre panel of each over one hour along with the mass of that panel.",
+  table:{ cap:"Performance of four insulating panels",
+          h:["Material","Heat transferred (W)","Panel mass (kg)"],
+          r:[["Mineral wool","18","4.1"],["Rigid foam","11","2.3"],["Cellulose","21","3.6"],["Aerogel panel","6","1.4"]] },
+  stem2:"The team wanted a material that both limits heat transfer and keeps weight down, and the data point to a single candidate: ______",
+  o:{A:"mineral wool was the heaviest panel and transferred the least heat.",
+     B:"cellulose transferred less heat than rigid foam but weighed more.",
+     C:"the aerogel panel transferred the least heat and was also the lightest.",
+     D:"rigid foam transferred less heat than the aerogel panel."}, a:"C",
+  w:{A:"Mineral wool is the heaviest, but at 18 W it is not the lowest transfer.",
+     B:"Cellulose transferred 21 W against rigid foam’s 11 W, so it transferred more.",
+     C:"Correct. 6 W is the lowest transfer and 1.4 kg the lowest mass — one material wins on both counts.",
+     D:"Rigid foam’s 11 W is higher than the aerogel’s 6 W."} },
+
+{ d:"Inferences",
+  p:"Which choice most logically completes the text?",
+  stem:"A writing system determines what can count as a spelling mistake. Where each symbol stands for a syllable, a writer who knows the spoken word can nearly always produce the written one. Where an alphabetic spelling preserves pronunciations centuries out of date, knowing the spoken word is not enough. It follows that comparisons of literacy across languages that rest on a single measure of spelling accuracy ______",
+  o:{A:"are the most reliable measure available to researchers.",
+     B:"may register differences between writing systems rather than differences in readers’ skill.",
+     C:"show that syllabic languages are easier to speak than alphabetic ones.",
+     D:"prove that alphabetic spelling systems ought to be reformed."}, a:"B",
+  w:{A:"The passage is building an objection to that measure.",
+     B:"Correct. If the system itself sets the difficulty of spelling, a spelling score partly measures the system.",
+     C:"The text concerns writing, not ease of speech.",
+     D:"A description of a difficulty is not a case for reform."} },
+
+{ d:"Inferences",
+  p:"Which choice most logically completes the text?",
+  stem:"Radiocarbon dating requires knowing how much carbon-14 the atmosphere held when the organism died. That figure has not held steady: it varies with solar activity and, in the last two centuries, with the burning of fossil fuels, which release carbon containing no carbon-14 at all. Calibration curves built from tree rings correct for these swings. A date reported without such a curve would therefore be ______",
+  o:{A:"dependent on obtaining a substantially larger sample.",
+     B:"impossible to calculate at all.",
+     C:"applicable only to organisms that died within the last century.",
+     D:"systematically offset rather than merely imprecise."}, a:"D",
+  w:{A:"Sample size is never mentioned.",
+     B:"The calculation runs; it is the result that is skewed.",
+     C:"Fossil-fuel carbon affects recent dates, but the solar variation runs throughout.",
+     D:"Correct. The atmospheric level was wrong in a particular direction at a particular time, so the error is a bias, not scatter."} },
+
+
+/* ---------- Standard English Conventions ---------- */
+{ d:"Boundaries",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"The expedition’s list named three instruments that could not be replaced once the ship had ______ the chronometer, which had been calibrated in Greenwich; the sextant; and the mercury barometer.",
+  o:{A:"sailed;",
+     B:"sailed:",
+     C:"sailed,",
+     D:"sailed"}, a:"B",
+  w:{A:"A semicolon there would make the sentence a list of four unequal things.",
+     B:"Correct. A complete clause precedes the colon, and the semicolons then separate list items that contain commas of their own.",
+     C:"A comma cannot introduce a list already punctuated with semicolons.",
+     D:"Without a mark the list runs straight into the clause."} },
+
+{ d:"Boundaries",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"The manuscript ______ was found in a monastery library in 1847, contains the only known text of the play.",
+  o:{A:"which",
+     B:"that",
+     C:", which",
+     D:", that"}, a:"C",
+  w:{A:"Leaves the clause open on one side and closed on the other.",
+     B:"A restrictive clause takes no commas, yet a comma still stands before <i>contains</i>.",
+     C:"Correct. A pair of commas encloses the supplementary clause, and <i>which</i> is the form it takes.",
+     D:"<i>That</i> cannot introduce a nonrestrictive clause."} },
+
+{ d:"Boundaries",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"Three of the four bridges — all of them built between 1890 and ______ replaced within the past decade.",
+  o:{A:"1905, were",
+     B:"1905 — were",
+     C:"1905 were",
+     D:"1905; were"}, a:"B",
+  w:{A:"Mixes a dash with a comma.",
+     B:"Correct. A dash opened the supplement, so a dash must close it.",
+     C:"Leaves the supplement unclosed.",
+     D:"A semicolon needs an independent clause on both sides."} },
+
+{ d:"Boundaries",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"The instrument performed flawlessly through six months of testing in the ______ it failed within an hour of being deployed in the field.",
+  o:{A:"laboratory; however,",
+     B:"laboratory, however,",
+     C:"laboratory however,",
+     D:"laboratory, however"}, a:"A",
+  w:{A:"Correct. A semicolon joins the clauses and the comma sets off the adverb that opens the second.",
+     B:"<i>However</i> is not a conjunction, so a comma leaves a splice.",
+     C:"No punctuation at all between two independent clauses.",
+     D:"Still a comma splice, and the adverb is left half-punctuated."} },
+
+{ d:"Form, Structure, and Sense",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"The programme trains its volunteers to identify native seedlings, to record the position of each one, and ______ invasive species from the surrounding ground.",
+  o:{A:"to remove",
+     B:"removing",
+     C:"they remove",
+     D:"the removal of"}, a:"A",
+  w:{A:"Correct. <i>To identify … to record … to remove</i> keeps all three parallel.",
+     B:"Breaks the series of infinitives.",
+     C:"Turns the third item into a clause.",
+     D:"Turns the third item into a noun phrase."} },
+
+{ d:"Form, Structure, and Sense",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"Among the papers recovered from the wreck ______ a passenger manifest listing more names than the company had ever reported.",
+  o:{A:"were",
+     B:"was",
+     C:"have been",
+     D:"are"}, a:"B",
+  w:{A:"Agrees with <i>papers</i>, which belongs to the opening prepositional phrase.",
+     B:"Correct. The sentence is inverted; the subject is <i>a passenger manifest</i>, and it is singular.",
+     C:"Plural, and the present perfect clashes with the past narrative.",
+     D:"Plural and present."} },
+
+{ d:"Form, Structure, and Sense",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"By the time the results appeared in print, the laboratory that produced them ______ for two years, and its records had been dispersed among three institutions.",
+  o:{A:"has been closed",
+     B:"was closing",
+     C:"had been closed",
+     D:"closes"}, a:"C",
+  w:{A:"Present perfect cannot sit inside a wholly past sequence.",
+     B:"Leaves the closure unfinished at the reference point.",
+     C:"Correct. The past perfect matches <i>had been dispersed</i> and places the closure before the publication.",
+     D:"Present tense."} },
+
+{ d:"Form, Structure, and Sense",
+  p:"Which choice completes the text so that it conforms to the conventions of Standard English?",
+  stem:"The two ______ conclusions diverged sharply, even though both had worked from the same set of measurements.",
+  o:{A:"researcher’s",
+     B:"researchers",
+     C:"researchers’",
+     D:"researchers’s"}, a:"C",
+  w:{A:"Singular possessive, but <i>two</i> and <i>both</i> require a plural.",
+     B:"Plural but not possessive.",
+     C:"Correct. A plural noun already ending in <i>s</i> takes the apostrophe after it.",
+     D:"Not a form English uses."} },
+
+
+/* ---------- Expression of Ideas ---------- */
+{ d:"Transitions",
+  p:"Which choice completes the text with the most logical transition?",
+  stem:"The survey found broad support across the district for the proposed bus route. Support was weakest, ______ among residents living closest to the site of the new depot.",
+  o:{A:"therefore,",
+     B:"however,",
+     C:"similarly,",
+     D:"moreover,"}, a:"B",
+  w:{A:"Broad support does not cause weak support.",
+     B:"Correct. It marks the exception carved out of the general finding.",
+     C:"The second fact runs against the first rather than matching it.",
+     D:"Signals an addition in the same direction."} },
+
+{ d:"Transitions",
+  p:"Which choice completes the text with the most logical transition?",
+  stem:"Standard models predicted that the crystal would conduct electricity poorly as it cooled. ______ conductivity climbed sharply below twenty kelvin.",
+  o:{A:"Accordingly,",
+     B:"Instead,",
+     C:"Likewise,",
+     D:"Consequently,"}, a:"B",
+  w:{A:"Marks a result that follows the prediction; this result defies it.",
+     B:"Correct. What happened replaces what was predicted.",
+     C:"Marks similarity, and the outcome is the reverse.",
+     D:"Marks consequence, not contradiction."} },
+
+{ d:"Transitions",
+  p:"Which choice completes the text with the most logical transition?",
+  stem:"The new dating method consumes only a milligram of material, a fraction of what the older technique destroyed. ______ it cannot be used on any sample that has been treated with modern preservatives.",
+  o:{A:"As a result,",
+     B:"For instance,",
+     C:"Even so,",
+     D:"In other words,"}, a:"C",
+  w:{A:"The limitation does not follow from the advantage.",
+     B:"The second sentence is not an example of the first.",
+     C:"Correct. It concedes a drawback that stands despite the advantage just granted.",
+     D:"The second sentence is not a restatement."} },
+
+{ d:"Rhetorical Synthesis",
+  p:"The student wants to explain how the MOSE system responds to a forecast flood. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+  stem:"While researching a topic, a student has taken the following notes:",
+  notes:["Venice’s <i>acqua alta</i> floods have grown more frequent since 1900.",
+         "The MOSE barrier system became operational in 2020.",
+         "MOSE consists of 78 mobile gates set at the lagoon’s three inlets.",
+         "The gates are raised when a tide above 110 cm is forecast.",
+         "Raising them takes about 30 minutes."],
+  o:{A:"Venice has seen increasingly frequent acqua alta floods since 1900.",
+     B:"The MOSE system consists of 78 mobile gates installed at three inlets to the Venetian lagoon.",
+     C:"MOSE became operational in 2020, decades after the floods began growing more frequent.",
+     D:"When a tide above 110 cm is forecast, MOSE’s 78 mobile gates rise over roughly 30 minutes to close the lagoon’s three inlets."}, a:"D",
+  w:{A:"Background on the problem, not the response.",
+     B:"Describes the hardware without saying what it does when a flood is forecast.",
+     C:"Gives a date rather than a response.",
+     D:"Correct. Trigger, mechanism and timing — the response from forecast to closed inlet."} },
+
+{ d:"Rhetorical Synthesis",
+  p:"The student wants to present the mechanism’s apparent uniqueness while acknowledging a competing view. Which choice most effectively uses relevant information from the notes to accomplish this goal?",
+  stem:"While researching a topic, a student has taken the following notes:",
+  notes:["The Antikythera mechanism was recovered from a shipwreck in 1901.",
+         "It contains at least 30 interlocking bronze gears.",
+         "It modelled the motions of the sun and the moon.",
+         "No comparable geared device is known in Europe until the fourteenth century.",
+         "Some scholars argue that similar devices existed but did not survive."],
+  o:{A:"No comparable geared device is known in Europe for another fourteen centuries, though some scholars argue that similar devices existed and simply did not survive.",
+     B:"The Antikythera mechanism, recovered in 1901, contains at least 30 interlocking bronze gears.",
+     C:"The mechanism used bronze gears to model the motions of the sun and the moon.",
+     D:"Scholars disagree about when geared devices first appeared in Europe."}, a:"A",
+  w:{A:"Correct. The gap of fourteen centuries gives the uniqueness; the clause after <i>though</i> gives the competing view.",
+     B:"Describes the object without either the uniqueness or the counter-view.",
+     C:"States a capability only.",
+     D:"Reports the disagreement but drops the uniqueness it is a disagreement about."} }
+
+];
+
+/* =============================================================
+   SAT module builder — turns the question data into task shells
+   and wires each one to the existing Choice widget
+   ============================================================= */
+var MODULES = [];
+
+/* -------------------------------------------------------------
+   Stopwatch: counts up, survives a reload, and turns red once it
+   passes the 32 minutes a real module allows.
+   ------------------------------------------------------------- */
+var MODULE_LIMIT_MS = 32 * 60 * 1000;
+
+function makeTimer(key, host){
+  var K = STORE + ":timer:" + key;
+  var elapsed = 0, running = false, startedAt = 0, tick = null, sinceSave = 0;
+
+  try{
+    var sv = JSON.parse(localStorage.getItem(K) || "null");
+    if(sv && typeof sv.e === "number" && isFinite(sv.e) && sv.e >= 0) elapsed = sv.e;
+  }catch(e){}
+
+  var disp   = host.querySelector(".tdisp");
+  var bStart = host.querySelector(".tstart");
+  var bReset = host.querySelector(".treset");
+
+  function total(){ return elapsed + (running ? Date.now() - startedAt : 0); }
+  function fmt(ms){
+    var s = Math.floor(ms / 1000), m = Math.floor(s / 60);
+    return (m < 10 ? "0" : "") + m + ":" + (s % 60 < 10 ? "0" : "") + (s % 60);
+  }
+  function save(){ try{ localStorage.setItem(K, JSON.stringify({ e: total() })); }catch(e){} }
+  function paint(){
+    var ms = total();
+    disp.textContent = fmt(ms);
+    disp.setAttribute("data-over", ms >= MODULE_LIMIT_MS ? "1" : "0");
+    host.setAttribute("data-running", running ? "1" : "0");
+    bStart.textContent = running ? "Pause" : (ms > 0 ? "Resume" : "Start");
+  }
+  function loop(){
+    if(!running) return;
+    paint();
+    if(++sinceSave >= 20){ sinceSave = 0; save(); }   /* write every ~5s */
+    tick = setTimeout(loop, 250);
+  }
+  function start(){
+    if(running) return;
+    running = true; startedAt = Date.now(); sinceSave = 0;
+    paint(); loop();
+  }
+  function pause(){
+    if(!running) return;
+    elapsed = total(); running = false;
+    if(tick){ clearTimeout(tick); tick = null; }
+    save(); paint();
+  }
+
+  function reset(){
+    if(tick){ clearTimeout(tick); tick = null; }
+    running = false; elapsed = 0; startedAt = 0;
+    save(); paint();
+  }
+  bStart.addEventListener("click", function(){ running ? pause() : start(); });
+  bReset.addEventListener("click", function(){
+    if(total() > 60000 && !confirm("Reset the stopwatch for this module?")) return;
+    reset();
+  });
+  /* a backgrounded tab throttles timers, so bank the time on the way out */
+  document.addEventListener("visibilitychange", function(){ if(document.hidden && running) save(); });
+  window.addEventListener("pagehide", function(){ if(running) save(); });
+
+  paint();
+  return { start:start, pause:pause, reset:reset, total:total };
+}
+
+function buildSatModule(key, data){
+  var host = document.querySelector('[data-satmod="' + key + '"]');
+  var ids = [];
+  data.forEach(function(q, i){
+    var n = i + 1, id = key + "q" + n;
+    ids.push(id);
+    var sec = el("div","task satq");
+    sec.id = id;
+    sec.innerHTML =
+      '<div class="task-head">' +
+        '<div class="task-n">' + n + '</div>' +
+        '<div class="task-q"><h3>' + q.p + '</h3></div>' +
+      '</div>' +
+      '<div class="task-body" data-widget="' + id + '"></div>' +
+      '<div class="task-foot" data-foot="' + id + '"></div>' +
+      '<div class="key" data-key="' + id + '" hidden></div>';
+    host.appendChild(sec);
+
+    new Choice({
+      id:id, ex:key,
+      keyLabel:"Question " + n + " · " + q.d,
+      stem:q.stem, stem2:q.stem2, texts:q.texts, notes:q.notes, table:q.table,
+      stemLabel:q.notes ? "The notes" : (q.table ? "The study" : "The text"),
+      options:["A","B","C","D"].map(function(k){ return {key:k, text:q.o[k]}; }),
+      answer:q.a,
+      why:q.w,
+      keyLine:q.a + " — " + q.o[q.a],
+      keyWhy:q.w[q.a].replace(/^Correct\.\s*/, "")
+    });
+  });
+
+  var bar = document.querySelector('[data-modbar="' + key + '"]');
+  bar.innerHTML =
+    '<div class="mgroup mtimer" data-running="0">' +
+      '<span class="lbl">Time</span>' +
+      '<b class="tdisp">00:00</b>' +
+      '<span class="tlimit">of 32:00</span>' +
+      '<button class="btn tstart" type="button">Start</button>' +
+      '<button class="btn btn-ghost treset" type="button">Reset</button>' +
+    '</div>' +
+    '<div class="mgroup mscore">' +
+      '<span class="lbl">Score</span>' +
+      '<span class="ms"></span>' +
+      '<span class="mm"><i></i></span>' +
+    '</div>';
+  var scoreGroup = bar.querySelector(".mscore");
+  var bCheck = el("button","btn","Check all");
+  bCheck.type = "button";
+  var bReset = el("button","btn btn-ghost","Reset module");
+  bReset.type = "button";
+  bCheck.addEventListener("click", function(){
+    timer.pause();
+    ids.forEach(function(id){
+      var w = BY_ID[id];
+      w.checked = true; w.revealed = false; w.render(); w.keyEl.hidden = true;
+    });
+    persist(); refreshScore();
+  });
+  bReset.addEventListener("click", function(){
+    if(!confirm("Clear every answer in this module?")) return;
+    ids.forEach(function(id){
+      var w = BY_ID[id];
+      w.state = w.init(); w.checked = false; w.revealed = false;
+      w.render(); w.keyEl.hidden = true;
+    });
+    persist(); refreshScore();
+  });
+  scoreGroup.appendChild(bCheck);
+  scoreGroup.appendChild(bReset);
+
+  var timer = makeTimer(key, bar.querySelector(".mtimer"));
+
+  MODULES.push({ key:key, ids:ids, timer:timer,
+                 ms:bar.querySelector(".ms"), mm:bar.querySelector(".mm i") });
+  return ids;
+}
+
+buildSatModule("m1", SAT_M1);
+buildSatModule("m2", SAT_M2);
+
 /* =============================================================
    Boot
    ============================================================= */
@@ -2080,16 +3130,22 @@ var meterEl = document.getElementById("meterfill");
 var jumpLinks = Array.prototype.slice.call(document.querySelectorAll("#jump a"));
 
 function refreshScore(){
-  var done = 0, perEx = {1:0,2:0,3:0,4:0}, need = {1:0,2:0,3:0,4:0};
+  var done = 0, perEx = {}, need = {};
   REG.forEach(function(w){
-    need[w.ex]++;
-    if(w.solved()){ done++; perEx[w.ex]++; }
+    need[w.ex] = (need[w.ex] || 0) + 1;
+    if(w.solved()){ done++; perEx[w.ex] = (perEx[w.ex] || 0) + 1; }
   });
   scoreEl.innerHTML = "<b>" + done + "</b> / " + TOTAL + ' <span class="score-w">correct</span>';
   meterEl.style.width = (done / TOTAL * 100) + "%";
   jumpLinks.forEach(function(a){
     var e = a.getAttribute("data-ex");
-    a.setAttribute("data-done", perEx[e] === need[e] ? "1" : "0");
+    a.setAttribute("data-done", (perEx[e] || 0) === need[e] ? "1" : "0");
+  });
+  MODULES.forEach(function(m){
+    var got = 0;
+    m.ids.forEach(function(id){ if(BY_ID[id] && BY_ID[id].solved()) got++; });
+    m.ms.innerHTML = "<b>" + got + "</b> <span>/ " + m.ids.length + "</span>";
+    m.mm.style.width = (got / m.ids.length * 100) + "%";
   });
 }
 
@@ -2102,6 +3158,7 @@ document.getElementById("resetall").addEventListener("click", function(){
     w.state = w.init(); w.checked = false; w.revealed = false;
     w.render(); w.keyEl.hidden = true;
   });
+  MODULES.forEach(function(m){ m.timer.reset(); });
   persist(); refreshScore();
   window.scrollTo({top:0, behavior:"smooth"});
 });
